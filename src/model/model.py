@@ -2,6 +2,9 @@ from keras import layers, Input, Model, optimizers
 import keras.backend as K
 import numpy as np
 import os
+import sys
+
+print("Imports working fine\n")
 
 data_path = '../../data/processed/'
 
@@ -119,12 +122,14 @@ def identity_loss(y_true, y_pred):
 # Siamese model
 
 in_dim=(155,220,1)
+out_dim = (2,3,4,5)
 input_anchor = Input(shape=(in_dim))
 input_positive = Input(shape=(in_dim))
 input_negative = Input(shape=(in_dim))
 embedding_a=embedding_model(input_anchor)
 embedding_p=embedding_model(input_positive)
 embedding_n=embedding_model(input_negative)
+embedding_y = embedding_model(input_y)
 
 embedding_concat = layers.concatenate(inputs=[embedding_a, 
                                     embedding_p, 
